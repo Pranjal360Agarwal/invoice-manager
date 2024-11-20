@@ -7,16 +7,14 @@ import App from "./App";
 import "./index.css";
 
 const store = configureStore({
-    reducer: {
-        app: appReducer,
-    },
+  reducer: {
+    app: appReducer,
+  },
 });
 
-ReactDOM.render( <
-    Provider store = { store } >
-    <
-    App / >
-    <
-    /Provider>,
-    document.getElementById("root")
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
 );

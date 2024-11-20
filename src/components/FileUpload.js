@@ -14,22 +14,34 @@ const FileUpload = () => {
   };
 
   const handleUpload = async () => {
-    setLoading(true);
-    try {
-      const extractedData = await Promise.all(files.map(extractData));
-      extractedData.forEach((data) => {
-        dispatch(setInvoices(data.invoices));
-        dispatch(setProducts(data.products));
-        dispatch(setCustomers(data.customers));
-      });
-      alert("Data processed successfully!");
-    } catch (error) {
-      console.error("Error during file upload:", error);
-      alert("Failed to process files.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  try {
+    const extractedData = await Promise.all(files.map(extractData));
+
+    // Combine data from multiple files
+    const combinedData = extractedData.reduce(
+      (acc, data) => ({
+        invoices: [...acc.invoices, ...data.invoices],
+        products: [...acc.products, ...data.products],
+        customers: [...acc.customers, ...data.customers],
+      }),
+      { invoices: [], products: [], customers: [] }
+    );
+
+    console.log("Combined Extracted Data:", combinedData); // Debugging
+
+    dispatch(setInvoices(combinedData.invoices));
+    dispatch(setProducts(combinedData.products));
+    dispatch(setCustomers(combinedData.customers));
+
+    alert("Data processed successfully!");
+  } catch (error) {
+    console.error("Error during file upload:", error);
+    alert("Failed to process files.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <Box sx={{ marginBottom: 4 }}>

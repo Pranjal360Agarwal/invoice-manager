@@ -5,6 +5,8 @@ import { Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@m
 const InvoicesTab = () => {
   const invoices = useSelector((state) => state.app.invoices);
 
+  if (!Array.isArray(invoices)) return <Typography>No invoices to display. Please upload a file.</Typography>;
+
   return (
     <div>
       <Typography variant="h6" sx={{ marginBottom: 2 }}>

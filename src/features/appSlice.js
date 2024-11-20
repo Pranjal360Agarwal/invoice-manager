@@ -9,13 +9,13 @@ const appSlice = createSlice({
   },
   reducers: {
     setInvoices(state, action) {
-      state.invoices = action.payload;
+      state.invoices = action.payload || [];
     },
     setProducts(state, action) {
-      state.products = action.payload;
+      state.products = action.payload || [];
     },
     setCustomers(state, action) {
-      state.customers = action.payload;
+      state.customers = action.payload || [];
     },
   },
 });

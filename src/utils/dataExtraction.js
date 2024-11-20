@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// Mock data extraction for development
+// Mock implementation for development
 export const extractData = async (file) => {
   console.log("Processing file:", file.name);
   return new Promise((resolve) => {
